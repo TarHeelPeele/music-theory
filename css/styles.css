@@ -1,0 +1,5 @@
+.nut{border-bottom: 5px solid gold;background-color: black; text-align: center;}
+.fret{border-bottom: 3px solid silver;background-color: black; text-align: center;}
+.showNote{color: white;}
+.hideNote{color: black;}
+.highlightNote{background-color: green}
