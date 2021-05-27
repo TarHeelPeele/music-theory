@@ -5,26 +5,7 @@ $(function () {
     });
 
     $("#instrumentsMenu").on("click", "a", function () {
-        //Set selected insturment and format dropdown
-        $("#instrumentsMenu").children().removeClass("active");
-        $(this).addClass("active");
-        $("#btnInstruments").text($(this).text());
-        selInstrument = app.instruments.find(element => element.name === $(this).text());
-
-        //build fretboard for selected instrument
-        $("#fretBoard").empty();
-        for (let f = 0; f <= selInstrument.frets; f++) {
-            $("#fretBoard").append(`<div id="fret${f}" class="row"></div>`);
-
-            //build the strings for the selected instrument
-            for (let s = selInstrument.strings; s > 0; s--) {
-                let frettedNoteValue = (app.notes.find(element => element.name === selInstrument.stringTunings[s - 1]).value + f) % 12;
-                let frettedNoteName = app.notes.find(element => element.value === frettedNoteValue).name;
-                $(`#fret${f}`).append(`<div id="noteStringFret_${s}_${f}" class="col ${f === 0 ? "nut showNote" : "fret showNote"}">${frettedNoteName}</div>`);
-            }
-        }
-        buildNoteControls();
-        toggleNoteDisplay();
+        buildInstrument(this);
     });
 
     app.notes.forEach(function (k) {
@@ -38,6 +19,19 @@ $(function () {
         $("#btnKeys").text($(this).text());
         selKey = app.notes.find(element => element.name === $(this).text());
         buildNoteControls()
+        toggleNoteDisplay();
+    });
+
+    $("#selCapo").on("change", "", function () {
+        let idInstr = `ddiInstrument${selInstrument.name}`
+        let elem = $(`a[id='${idInstr}']`);
+        buildInstrument(elem);
+    });
+
+    $("#selDisplayFrom").on("change", "", function () {
+        toggleNoteDisplay();
+    });
+    $("#selDisplayTo").on("change", "", function () {
         toggleNoteDisplay();
     });
 
@@ -60,15 +54,17 @@ function toggleNoteDisplay() {
     if (!selInstrument || !selKey || !selScale) {
         return;
     }
+    let displayFrom = Number(selDisplayFrom.value);
+    let displayTo = Number(selDisplayTo.value);
 
-    //
+    //remove all classes associated with showing a note
     $('div[id^="noteStringFret"]').removeClass("showNote");
     $('div[id^="noteStringFret"]').removeClass("hideNote");
     $('div[id^="noteStringFret"]').removeClass("highlightNote");
 
     let notesToShow = getScaleNotes();
 
-    //Interate fretboard and c if note is in the scale
+    //Iterate fretboard and c if note is in the scale
     for (let f = 0; f <= selInstrument.frets; f++) {
         for (let s = selInstrument.strings; s > 0; s--) {
             let elem = $(`#noteStringFret_${s}_${f}`);
@@ -77,7 +73,7 @@ function toggleNoteDisplay() {
     }
 
     //highlight note/chord
-    if ($("input:checked")){
+    if ($("input:checked")) {
         for (let f = 0; f <= selInstrument.frets; f++) {
             for (let s = selInstrument.strings; s > 0; s--) {
                 let elem = $(`#noteStringFret_${s}_${f}`);
@@ -85,13 +81,25 @@ function toggleNoteDisplay() {
 
                 hlNote(note, elem)
 
-                if ($("input:checked").attr("chord") === 'true'){
+                if ($("input:checked").attr("chord") === 'true') {
                     const rootIndex = notesToShow.findIndex(element => element.name === note)
-                    hlNote(notesToShow[(rootIndex + 2) % notesToShow.length].name,elem);
-                    hlNote(notesToShow[(rootIndex + 4) % notesToShow.length].name,elem);
+                    hlNote(notesToShow[(rootIndex + 2) % notesToShow.length].name, elem);
+                    hlNote(notesToShow[(rootIndex + 4) % notesToShow.length].name, elem);
                 }
             }
-        }    
+        }
+    }
+
+    // Only show notes in display from to
+    for (let f = 1; f <= selInstrument.frets; f++) {
+        for (let s = selInstrument.strings; s > 0; s--) {
+            if( (displayFrom > 0 || displayTo > 0) && (f < displayFrom  || f > displayTo) ){
+                let elem = $(`#noteStringFret_${s}_${f}`);
+                elem.removeClass("showNote");
+                elem.removeClass("highlightNote");
+                elem.addClass("hideNote");
+            }
+        }
     }
 }
 
@@ -142,8 +150,32 @@ function getScaleNotes() {
     return scaleNotes;
 }
 
-function hlNote(note, elem){
-    if (note === elem.text()){
+function hlNote(note, elem) {
+    if (note === elem.text()) {
         elem.addClass("highlightNote")
     }
+}
+
+function buildInstrument(instr) {
+    //Set selected insturment and format dropdown
+    $("#instrumentsMenu").children().removeClass("active");
+    $(instr).addClass("active");
+    $("#btnInstruments").text($(instr).text());
+    selInstrument = app.instruments.find(element => element.name === $(instr).text());
+    let capo = Number(selCapo.value);
+
+    //build fretboard for selected instrument
+    $("#fretBoard").empty();
+    for (let f = 0; f <= selInstrument.frets - capo; f++) {
+        $("#fretBoard").append(`<div id="fret${f}" class="row"></div>`);
+
+        //build the strings for the selected instrument
+        for (let s = selInstrument.strings; s > 0; s--) {
+            let frettedNoteValue = (app.notes.find(element => element.name === selInstrument.stringTunings[s - 1]).value + capo + f) % 12;
+            let frettedNoteName = app.notes.find(element => element.value === frettedNoteValue).name;
+            $(`#fret${f}`).append(`<div id="noteStringFret_${s}_${f}" class="col ${f === 0 ? "nut showNote" : "fret showNote"}">${frettedNoteName}</div>`);
+        }
+    }
+    buildNoteControls();
+    toggleNoteDisplay();
 }

@@ -58,16 +58,16 @@ const app = {
             , stringTunings: ["E","B","G","D","A","E"]
         }
         , {
-            name: 'Banjo'
-            , strings: 4
-            , frets: 22
-            , stringTunings: ["D","B", "G", "D"]
-        }
-        , {
             name: 'Fiddle'
             , strings: 4
             , frets: 8
             , stringTunings: ["E", "A", "D", "G"]
+        }
+        , {
+            name: 'Banjo Open G tuning'
+            , strings: 4
+            , frets: 22
+            , stringTunings: ["D","B", "G", "D"]
         }
         , {
             name: 'Banjo Double C'
@@ -75,12 +75,22 @@ const app = {
             , frets: 22
             , stringTunings: ["D","C", "G", "C"]
         }
+        , {
+            name: 'Banjo Lost Lula tuning'
+            , strings: 4
+            , frets: 22
+            , stringTunings: ["C#/Db","B", "F#/Gb", "C#/Db"]
+        }
     ]
     ,scales:[
-        {name: "Major", intervals: [2,2,1,2,2,2]}
+        {name: "Major (Ionian)", intervals: [2,2,1,2,2,2]}
         , {name: "Major Pentatonic", intervals: [2,2,3,2]}
-        , {name: "Minor", intervals: [2,1,2,2,1,2]}
+        , {name: "Minor (Aeolian)", intervals: [2,1,2,2,1,2]}
         , {name: "Minor Pentatonic", intervals: [3,2,2,3]}
+        , {name : "Dorian", intervals: [2,1,2,2,2,1]}
+        , {name : "Phrygian", intervals: [1,2,2,2,1,2]}
+        , {name : "Lydian", intervals: [2,2,2,1,2,2]}
         , {name : "Mixolydian", intervals: [2,2,1,2,2,1]}
+        , {name : "Locrian", intervals: [1,2,2,1,2,2]}
     ]
 }

@@ -15,7 +15,75 @@
 </head>
 
 <body>
-    <h1 id="header-text">Music Theory Helper</h1>
+    <div class="container">
+        <div class="row">
+            <!-- Header -->
+            <div class="col-9">
+                <h1 id="header-text">Music Theory Helper</h1>
+            </div>
+
+            <!-- Options-->
+            <div class="col-3">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample">
+                    Options
+                </button>
+                <div class="collapse" id="collapseExample">
+                    <div class="card card-body">
+                        <label for="selCapo">Capo</label>
+                        <select id="selCapo" class="form-control form-control-lg">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <label for="selDisplayFrom">Display From</label>
+                        <select id="selDisplayFrom" class="form-control form-control-lg">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                        </select>
+                        <label for="selDisplayTo">Display To</label>
+                        <select id="selDisplayTo" class="form-control form-control-lg">
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <div class="container">
         <div class="row">
@@ -34,15 +102,15 @@
             <!-- Keys -->
             <div class="col">
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="btnKeys"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="btnKeys" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         -Select key-
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="keysMenu">
                     </div>
                 </div>
-            </div>     
-            
+            </div>
+
             <!-- Scales -->
             <div class="col">
                 <div class="dropdown">
@@ -53,7 +121,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="scalesMenu">
                     </div>
                 </div>
-            </div>            
+            </div>
         </div>
         <div id="scaleNotes" class="row">
         </div>
@@ -73,8 +141,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-     <script src="./js/utils.js"></script>
+    <script src="./js/utils.js"></script>
     <script src="./js/objects.js"></script>
- </body>
+</body>
 
 </html>
