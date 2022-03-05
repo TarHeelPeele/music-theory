@@ -76,6 +76,12 @@ const app = {
             , stringTunings: ["D","C", "G", "C"]
         }
         , {
+            name: 'Banjo Double A'
+            , strings: 4
+            , frets: 22
+            , stringTunings: ["B","A", "E", "A"]
+        }
+        , {
             name: 'Banjo Lost Lula tuning'
             , strings: 4
             , frets: 22
