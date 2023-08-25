@@ -101,9 +101,9 @@ const app = {
         }
     ]
     ,scales:[
-        {name: "Major (Ionian)", intervals: [2,2,1,2,2,2]}
+        {name: "Major (Ionian)", intervals: [2,2,1,2,2,2], chords:['Maj','Min', 'Min', 'Maj', 'Maj', 'Min', 'Dim']}
         , {name: "Major Pentatonic", intervals: [2,2,3,2]}
-        , {name: "Minor (Aeolian)", intervals: [2,1,2,2,1,2]}
+        , {name: "Minor (Aeolian)", intervals: [2,1,2,2,1,2], chords:['Min', 'Dim', 'Maj', 'Min', 'Min','Maj','Maj']}
         , {name: "Minor Pentatonic", intervals: [3,2,2,3]}
         , {name : "Dorian", intervals: [2,1,2,2,2,1]}
         , {name : "Phrygian", intervals: [1,2,2,2,1,2]}

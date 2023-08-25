@@ -109,7 +109,7 @@ function buildNoteControls() {
     //build notes in the scale
     $("#scaleNotes").empty();
     for (let n = 0; n <= notesToShow.length - 1; n++) {
-        $("#scaleNotes").append(`<div id="scaleNote${n}" class="col">${notesToShow[n].name}${createRadioButtonsForScaleNote(notesToShow[n].name)}</div>`);
+        $("#scaleNotes").append(`<div id="scaleNote${n}" class="col">${notesToShow[n].name}${createRadioButtonsForScaleNote(notesToShow[n].name, n)}</div>`);
     }
 
     $('input[name="hlNoteChord"]').on("click", function () {
@@ -117,7 +117,7 @@ function buildNoteControls() {
     });
 }
 
-function createRadioButtonsForScaleNote(noteName) {
+function createRadioButtonsForScaleNote(noteName, scaleDegreeIndex) {
     return `<div class="form-check">
                 <input class="form-check-input" type="radio" name="hlNoteChord" id="radioNote${noteName}" note="${noteName}" chord="false">
                 <label class="form-check-label" for="radioNote${noteName}">
@@ -127,7 +127,7 @@ function createRadioButtonsForScaleNote(noteName) {
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="hlNoteChord" id="radioChord${noteName}" note="${noteName}" chord="true">
                 <label class="form-check-label" for="radioChord${noteName}">
-                    chord
+                    ${getChordName(scaleDegreeIndex)}
                 </label>
             </div>`;
 }
@@ -178,4 +178,11 @@ function buildInstrument(instr) {
     }
     buildNoteControls();
     toggleNoteDisplay();
+}
+
+function getChordName(scaleDegreeIndex){
+    if (selScale.chords){
+        return selScale.chords[scaleDegreeIndex] + ' chord';
+    }
+    return 'chord';
 }
